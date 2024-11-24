@@ -2,10 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
+import { Chrome } from "lucide-react";
 import Link from "next/link";
 
 export default async function Login() {
   return (
+    <>
+      <h1 className="fixed top-5 left-5 font-bold text-lg">SecondBrain</h1>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -37,6 +40,7 @@ export default async function Login() {
               Login
             </Button>
             <Button variant="outline" className="w-full">
+              <Chrome className="mr-2 h-4 w-4" />
               Login with Google
             </Button>
           </div>
@@ -48,5 +52,6 @@ export default async function Login() {
           </div>
         </CardContent>
       </Card>
+    </>
   );
 }
