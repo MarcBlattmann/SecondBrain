@@ -1,32 +1,52 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function ForgotPassword() {
-  async function handleForgotPassword(event: { preventDefault: () => void; target: { email: { value: any; }; }; }) {
-    event.preventDefault();
-    const email = event.target.email.value;
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
     try {
-      // Beispiel-API-Aufruf zum Backend (URL anpassen)
-      const response = await fetch("/api/auth/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
       });
 
-      if (response.ok) {
-        alert("A password reset link has been sent to your email.");
-      } else {
-        alert("Failed to send reset link. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again.");
+      if (error) throw error;
+
+      setSuccess('Check your email for a password reset link');
+    } catch (error: any) {
+      setError(error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  if (!mounted) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
   }
 
   return (
@@ -34,24 +54,32 @@ export default function ForgotPassword() {
       <CardHeader>
         <CardTitle className="text-2xl">Forgot Password</CardTitle>
         <CardDescription>
-          Enter your email below to receive a password reset link.
+          Enter your email to receive a password reset link
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="grid gap-4">
+        <form onSubmit={handleSubmit} className="grid gap-4">
+          {error && <div className="text-red-600 text-sm">{error}</div>}
+          {success && <div className="text-green-600 text-sm">{success}</div>}
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
-              name="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="m@example.com"
               required
             />
           </div>
-          <Button type="submit" className="w-full">
-            Send Reset Link
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? 'Sending...' : 'Send Reset Link'}
           </Button>
+          <div className="text-center text-sm">
+            <Link href="/sign-in" className="text-primary hover:underline">
+              Back to Sign In
+            </Link>
+          </div>
         </form>
       </CardContent>
     </Card>
