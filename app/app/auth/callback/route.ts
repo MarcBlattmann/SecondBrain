@@ -2,7 +2,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<Response> {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
   const next = requestUrl.searchParams.get('next') ?? '/protected'

@@ -15,7 +15,7 @@ import { LogOut, Settings, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
-export function TopBar() {
+function TopBar() {
   const router = useRouter()
   const supabase = createClientComponentClient();
   const [user, setUser] = React.useState({ name: '', email: '' });
@@ -26,7 +26,7 @@ export function TopBar() {
       if (data && data.user) {
         setUser({
           name: data.user.user_metadata?.full_name || 'User',
-          email: data.user.email,
+          email: data.user.email || '',
         });
       }
     };
