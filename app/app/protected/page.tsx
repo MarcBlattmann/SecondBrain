@@ -26,7 +26,7 @@ function TopBar() {
       if (data && data.user) {
         setUser({
           name: data.user.user_metadata?.full_name || 'User',
-          email: data.user.email,
+          email: data.user.email || '',
         });
       }
     };
