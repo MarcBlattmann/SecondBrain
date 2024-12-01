@@ -32,15 +32,13 @@ export default function Page() {
             <div className="space-y-8">
               <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold">
                 <span className="mr-2">✨</span>
-                Free forever. No credit card
+                Try out for free
               </div>
               
               <h1 className="text-5xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
-                Get your
+                Get yor
                 <br />
                 Seccond Brain
-                <br />
-                
               </h1>
 
               <div className="flex flex-wrap items-center gap-4">
@@ -57,7 +55,7 @@ export default function Page() {
 
               <div className="max-w-md">
                 <p className="text-xl text-muted-foreground">
-                  Trust us to help you manage your knowledge efficiently and without hassle.
+                  Use your brain to create new ideas, not just to store them.
                 </p>
               </div>
             </div>
@@ -76,12 +74,12 @@ export default function Page() {
           </div>
 
           {/* Feature List */}
-          <div className="mt-20 grid gap-4 md:gap-8">
+          <div className="mt-20 grid gap-4 md:gap-8 cursor-pointer">
             {[
               {
                 icon: Shield,
-                title: "Secure Storage",
-                description: "Your data is safe with end-to-end encryption.",
+                title: "Manage your finance",
+                description: "Take control of your spending and savings with our comprehensive finance tracker!",
               },
               {
                 icon: Sparkles,
@@ -90,8 +88,8 @@ export default function Page() {
               },
               {
                 icon: Share2,
-                title: "Easy Sharing",
-                description: "Share with your team effortlessly.",
+                title: "Manage your ideas",
+                description: "Give your ideas a place to be ",
               },
             ].map((feature, i) => (
               <div
