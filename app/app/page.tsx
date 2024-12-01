@@ -1,5 +1,8 @@
+'use client'
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ArrowRight, Shield, Sparkles, Share2 } from 'lucide-react'
 
 export default function Page() {
   return (
@@ -26,7 +29,89 @@ export default function Page() {
         </div>
       </header>
       <main className="container mx-auto mt-6">
-        {/* Your main content goes here */}
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold">
+                <span className="mr-2">✨</span>
+                Try out for free
+              </div>
+              
+              <h1 className="text-5xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
+                Get yor
+                <br />
+                Seccond Brain
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <Button size="lg" className="h-12 px-6" asChild>
+                  <Link href="/sign-up">Get Startet</Link>
+                </Button>
+                <Link 
+                  href="#features" 
+                  className="inline-flex items-center text-sm font-medium underline underline-offset-4"
+                >
+                  See Features
+                </Link>
+              </div>
+
+              <div className="max-w-md">
+                <p className="text-xl text-muted-foreground">
+                  Use your brain to create new ideas, not just to store them.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="relative aspect-square overflow-hidden rounded-full bg-gradient-to-b from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/10">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
+                  alt="Second Brain visualization"
+                  className="object-cover w-full h-full"
+                  width={512}
+                  height={512}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Feature List */}
+          <div className="mt-20 grid gap-4 md:gap-8 cursor-pointer">
+            {[
+              {
+                icon: Shield,
+                title: "Manage your finance",
+                description: "Take control of your spending and savings with our comprehensive finance tracker!",
+              },
+              {
+                icon: Sparkles,
+                title: "Smart Organization",
+                description: "Keep your knowledge well-structured.",
+              },
+              {
+                icon: Share2,
+                title: "Manage your ideas",
+                description: "Give your ideas a place to be ",
+              },
+            ].map((feature, i) => (
+              <div
+                key={i}
+                className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:bg-muted"
+              >
+                <div className="flex items-center gap-4">
+                  <feature.icon className="h-5 w-5" />
+                  <div>
+                    <h3 className="font-medium leading-none">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+                <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
     </div>
   )
