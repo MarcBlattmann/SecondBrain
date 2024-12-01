@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Shield, Sparkles, Share2 } from 'lucide-react'
@@ -42,8 +44,8 @@ export default function Page() {
               </h1>
 
               <div className="flex flex-wrap items-center gap-4">
-                <Button size="lg" className="h-12 px-6">
-                  Get Started
+                <Button size="lg" className="h-12 px-6" asChild>
+                  <Link href="/sign-up">Get Startet</Link>
                 </Button>
                 <Link 
                   href="#features" 
