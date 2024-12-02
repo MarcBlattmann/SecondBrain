@@ -1,1 +1,1 @@
-# SecondBrain
+# SecondBrain (Beta)
