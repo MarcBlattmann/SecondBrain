@@ -1,2 +1,2 @@
 # SecondBrain (In development)
-comming soon 😉
+comming soon 😉.
